@@ -115,11 +115,6 @@ public class chipsFastFood{
     return approved;
   }
 
-  //method to give nutrition suggestions to user
-  public static void suggestion(int age, String name){
-
-  }
-
   public static void main(String[] args){
     //create menu item dictionarys
     Hashtable<String, Integer> menuCal = new Hashtable<String, Integer>();
@@ -140,8 +135,8 @@ public class chipsFastFood{
     menuPrice.put("Veggie Burger", 4.99);
     menuBurgerSymbol.put("C", "Veggie Burger");
     menuCal.put("No Burger    ", 0);
-    menuPrice.put("No Burger    ", 0.0);
-    menuBurgerSymbol.put("D", "No Burger");
+    menuPrice.put("No Burger    ", 0.00);
+    menuBurgerSymbol.put("D", "No Burger    ");
 
     //side orders
     menuCal.put("Fries        ", 100);
@@ -154,7 +149,7 @@ public class chipsFastFood{
     menuPrice.put("Chef Salad   ", 2.99);
     menuSideOrderSymbol.put("C", "Chef Salad   ");
     menuCal.put("No Side Order", 0);
-    menuPrice.put("No Side Order", 0.0);
+    menuPrice.put("No Side Order", 0.00);
     menuSideOrderSymbol.put("D", "No Side Order");
 
     //drinks
@@ -168,7 +163,7 @@ public class chipsFastFood{
     menuPrice.put("Milk         ", 2.59);
     menuDrinkSymbol.put("C", "Milk         ");
     menuCal.put("No Drink     ", 0);
-    menuPrice.put("No Drink     ", 0.0);
+    menuPrice.put("No Drink     ", 0.00);
     menuDrinkSymbol.put("D", "No Drink     ");
 
     //desserts
@@ -182,7 +177,7 @@ public class chipsFastFood{
     menuPrice.put("Fruit Cup    ", 0.99);
     menuDessertSymbol.put("C", "Fruit Cup    ");
     menuCal.put("No Dessert   ", 0);
-    menuPrice.put("No Dessert   ", 0.0);
+    menuPrice.put("No Dessert   ", 0.00);
     menuDessertSymbol.put("D", "No Dessert   ");
 
     //create Scanner
