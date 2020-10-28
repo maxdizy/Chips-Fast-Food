@@ -55,7 +55,7 @@ public class chipsFastFood{
 
   //method to check if input is a DOUBLE
   public static boolean checkAge(String age){
-    char[] possibleEntries = "123456789".toCharArray();
+    char[] possibleEntries = "0123456789".toCharArray();
     char[] ageArray = age.toCharArray();
     boolean verified = false;
     for (char digit : ageArray){
