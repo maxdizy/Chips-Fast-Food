@@ -27,6 +27,12 @@ public class chipsFastFood{
     System.out.println("D. No Drink          0 Calories                     D. No Dessert         0 Calories           ");
   }
 
+  //method to round values to two decimal places
+  public static double roundVal(double value){
+    double rounded = Math.round(value * 100) / 100.0;
+    return rounded;
+  }
+
   //method to print Burger Menu
   public static String printBurgerMenu(){
     return ("\n" + "A. Cheese Burger   B. Fish Burger    C. Veggie Burger    D. No Burger");
@@ -48,26 +54,27 @@ public class chipsFastFood{
   }
 
   //method to check if input is a DOUBLE
-  public static void checkIfDouble(String prompt, double doubleVar){
-    Scanner scan = new Scanner(System.in);
-    boolean ifDouble;
-    System.out.print(prompt);
-    do{
-      if(scan.hasNextDouble()){
-        doubleVar = scan.nextDouble();
-        ifDouble = true;
-      }else{
-        System.out.println("invalid response. please enter a number and try again...");
-        ifDouble = false;
-        scan.next();
-        System.out.print(prompt);
+  public static boolean checkAge(String age){
+    char[] possibleEntries = "123456789".toCharArray();
+    char[] ageArray = age.toCharArray();
+    boolean verified = false;
+    for (char digit : ageArray){
+      verified = false;
+      for (char options : possibleEntries){
+        if (digit == options){
+          verified = true;
+        }
       }
-    }while (!(ifDouble));
+    if(!verified){
+        System.out.println("invalid response. please enter a whole number and try again:");
+        return false;
+      }
+    }
+    return true;
   }
 
   //method to check if name is compossed of letters
   public static boolean checkName(String name){
-    Scanner scan = new Scanner(System.in);
     boolean confirmed = false;
     boolean ifString = false;
     char[] nameArray = name.toCharArray();
@@ -89,7 +96,6 @@ public class chipsFastFood{
 
   //method to check if input is a A, B, C OR D
   public static boolean checkChoice(String input){
-    Scanner scan = new Scanner(System.in);
     boolean approved = false;
     char[] possibleEntries = {'A', 'B', 'C', 'D'};
     char[] inputArray = input.toCharArray();
@@ -109,70 +115,75 @@ public class chipsFastFood{
     return approved;
   }
 
+  //method to give nutrition suggestions to user
+  public static void suggestion(int age, String name){
+
+  }
+
   public static void main(String[] args){
     //create menu item dictionarys
-    Hashtable<String, Object> menuCal = new Hashtable<String, Object>();
-    Hashtable<String, Object> menuPrice = new Hashtable<String, Object>();
+    Hashtable<String, Integer> menuCal = new Hashtable<String, Integer>();
+    Hashtable<String, Double> menuPrice = new Hashtable<String, Double>();
     Hashtable<String, String> menuBurgerSymbol = new Hashtable<String, String>();
     Hashtable<String, String> menuSideOrderSymbol = new Hashtable<String, String>();
     Hashtable<String, String> menuDrinkSymbol = new Hashtable<String, String>();
     Hashtable<String, String> menuDessertSymbol = new Hashtable<String, String>();
 
     //burgers
-    menuCal.put("Cheeseburger", 461);
-    menuPrice.put("Cheeseburger", 3.99);
-    menuBurgerSymbol.put("A", "Cheeseburger");
-    menuCal.put("Fish Burger", 431);
-    menuPrice.put("Fish Burger", 4.99);
+    menuCal.put("Cheeseburger ", 461);
+    menuPrice.put("Cheeseburger ", 3.99);
+    menuBurgerSymbol.put("A", "Cheeseburger ");
+    menuCal.put("Fish Burger  ", 431);
+    menuPrice.put("Fish Burger  ", 4.99);
     menuBurgerSymbol.put("B", "Fish Burger");
     menuCal.put("Veggie Burger", 420);
     menuPrice.put("Veggie Burger", 4.99);
     menuBurgerSymbol.put("C", "Veggie Burger");
-    menuCal.put("No Burger", 0);
-    menuPrice.put("No Burger", 0);
+    menuCal.put("No Burger    ", 0);
+    menuPrice.put("No Burger    ", 0.0);
     menuBurgerSymbol.put("D", "No Burger");
 
     //side orders
-    menuCal.put("Fries", 100);
-    menuPrice.put("Fries", 2.99);
-    menuSideOrderSymbol.put("A", "Fries");
-    menuCal.put("Baked Potato", 57);
-    menuPrice.put("Baked Potato", 1.99);
-    menuSideOrderSymbol.put("B", "Baked Potato");
-    menuCal.put("Chef Salad", 70);
-    menuPrice.put("Chef Salad", 2.99);
-    menuSideOrderSymbol.put("C", "Chef Salad");
+    menuCal.put("Fries        ", 100);
+    menuPrice.put("Fries        ", 2.99);
+    menuSideOrderSymbol.put("A", "Fries        ");
+    menuCal.put("Baked Potato ", 57);
+    menuPrice.put("Baked Potato ", 1.99);
+    menuSideOrderSymbol.put("B", "Baked Potato ");
+    menuCal.put("Chef Salad   ", 70);
+    menuPrice.put("Chef Salad   ", 2.99);
+    menuSideOrderSymbol.put("C", "Chef Salad   ");
     menuCal.put("No Side Order", 0);
-    menuPrice.put("No Side Order", 0);
+    menuPrice.put("No Side Order", 0.0);
     menuSideOrderSymbol.put("D", "No Side Order");
 
     //drinks
-    menuCal.put("Soft Drink", 130);
-    menuPrice.put("Soft Drink", 1.99);
-    menuDrinkSymbol.put("A", "Soft Drink");
-    menuCal.put("Orange Juice", 160);
-    menuPrice.put("Orange Juice", 2.99);
-    menuDrinkSymbol.put("B", "Orange Juice");
-    menuCal.put("Milk", 118);
-    menuPrice.put("Milk", 2.50);
-    menuDrinkSymbol.put("C", "Milk");
-    menuCal.put("No Drink", 0);
-    menuPrice.put("No Drink", 0);
-    menuDrinkSymbol.put("D", "No Drink");
+    menuCal.put("Soft Drink   ", 130);
+    menuPrice.put("Soft Drink   ", 1.99);
+    menuDrinkSymbol.put("A", "Soft Drink   ");
+    menuCal.put("Orange Juice ", 160);
+    menuPrice.put("Orange Juice ", 2.99);
+    menuDrinkSymbol.put("B", "Orange Juice ");
+    menuCal.put("Milk         ", 118);
+    menuPrice.put("Milk         ", 2.59);
+    menuDrinkSymbol.put("C", "Milk         ");
+    menuCal.put("No Drink     ", 0);
+    menuPrice.put("No Drink     ", 0.0);
+    menuDrinkSymbol.put("D", "No Drink     ");
 
     //desserts
-    menuCal.put("Apple Pie", 167);
-    menuPrice.put("Apple Pie", 2.99);
-    menuDessertSymbol.put("A", "Apple Pie");
-    menuCal.put("Sundae", 266);
-    menuPrice.put("Sundae", 1.99);
-    menuDessertSymbol.put("B", "Sundae");
-    menuCal.put("Fruit Cup", 75);
-    menuPrice.put("Fruit Cup", 0.99);
-    menuDessertSymbol.put("C", "Fruit Cup");
-    menuCal.put("No Dessert", 0);
-    menuPrice.put("No Dessert", 0);
-    menuDessertSymbol.put("D", "No Dessert");
+    menuCal.put("Apple Pie    ", 167);
+    menuPrice.put("Apple Pie    ", 2.99);
+    menuDessertSymbol.put("A", "Apple Pie    ");
+    menuCal.put("Sundae       ", 266);
+    menuPrice.put("Sundae       ", 1.99);
+    menuDessertSymbol.put("B", "Sundae       ");
+    menuCal.put("Fruit Cup    ", 75);
+    menuPrice.put("Fruit Cup    ", 0.99);
+    menuDessertSymbol.put("C", "Fruit Cup    ");
+    menuCal.put("No Dessert   ", 0);
+    menuPrice.put("No Dessert   ", 0.0);
+    menuDessertSymbol.put("D", "No Dessert   ");
 
     //create Scanner
     Scanner scan = new Scanner(System.in);
@@ -236,6 +247,119 @@ public class chipsFastFood{
     }
     dessertChoice = menuDessertSymbol.get(dessertChoice);
 
-    System.out.println(burgerChoice + " " + sideOrderChoice + " " + drinkChoice + " " + dessertChoice);
+    //print order summary
+    double orderTotal = menuPrice.get(burgerChoice) + menuPrice.get(sideOrderChoice) + menuPrice.get(drinkChoice) + menuPrice.get(dessertChoice);
+    int totalCalories = menuCal.get(burgerChoice) + menuCal.get(sideOrderChoice) + menuCal.get(drinkChoice) + menuCal.get(dessertChoice);
+    System.out.println("\n" + "Okay " + name + ", this is your order summary...");
+    System.out.println("---------------------------");
+    System.out.println(burgerChoice + "         $" + menuPrice.get(burgerChoice));
+    System.out.println(sideOrderChoice + "         $" + menuPrice.get(sideOrderChoice));
+    System.out.println(drinkChoice + "         $" + menuPrice.get(drinkChoice));
+    System.out.println(dessertChoice + "         $" + menuPrice.get(dessertChoice));
+    System.out.println("\n" + "Total        " + "         $" + roundVal(orderTotal));
+
+    //ask user if they want nutrition suggestions
+    boolean wantSuggestion = false;
+    while (!wantSuggestion){
+      System.out.print("\n" + "Your order has a total of " + totalCalories + " calories. Would you like me to give you a nutritional suggestion? (YES or NO): ");
+      String suggestionsResponse = scan.next().toUpperCase();
+
+      //if user wants suggestion
+      String age = "";
+      if (suggestionsResponse.equals("YES")){
+        boolean ageVerrified = false;
+        while (!ageVerrified){
+          System.out.print("\n" + "Please enter your age so I know your recommended daily calorie intake: ");
+          age = scan.next();
+          ageVerrified = checkAge(age);
+        }
+            int ageInt = Integer.parseInt(age);
+            //order for users under 16
+            if (ageInt < 16){
+                //print order summary for under 16
+                double u16SuggestedOrderTotal = menuPrice.get("Veggie Burger") + menuPrice.get("Baked Potato ") + menuPrice.get("Milk         ") + menuPrice.get("Fruit Cup    ");
+                int u16SuggestedTotalCalories = menuCal.get("Veggie Burger") + menuCal.get("Baked Potato ") + menuCal.get("Milk         ") + menuCal.get("Fruit Cup    ");
+                System.out.println("\n" + "Okay " + name + ", this is my recommended order...");
+                System.out.println("---------------------------");
+                System.out.println("Veggie Burger" + "         $" + menuPrice.get("Veggie Burger"));
+                System.out.println("Baked Potato " + "         $" + menuPrice.get("Baked Potato "));
+                System.out.println("Milk         " + "         $" + menuPrice.get("Milk         "));
+                System.out.println("Fruit Cup    " + "         $" + menuPrice.get("Fruit Cup    "));
+                System.out.println("\n" + "Total        " + "         $" + roundVal(u16SuggestedOrderTotal));
+
+              //find out if user wants to accept suggestion
+              boolean accepted = false;
+              while(!accepted){
+              System.out.print("\n" + "This order has a total of " + u16SuggestedTotalCalories + " calories. Would you like to accept it? (YES or NO): ");
+              String accept = scan.next().toUpperCase();
+
+              //if user wants suggested order
+              if (accept.equals("YES")){
+                System.out.println("\n" + "Okay " + name + ", I will begin making your order now, please follow the payment instructions on the machine");
+                accepted = true;
+                wantSuggestion = true;
+              }
+
+              //if user does not want suggested orders
+                else if (accept.equals("NO")){
+                  System.out.println("\n" + "Okay " + name + ", I will begin making your previous order now, please follow the payment instructions on the machine");
+                  accepted = true;
+                  wantSuggestion = true;
+                }
+              }
+            }
+
+
+                else if (ageInt >= 16){
+                  //print order summary for over 16
+                  double o16SuggestedOrderTotal = menuPrice.get("Cheeseburger ") + menuPrice.get("Chef Salad   ") + menuPrice.get("Orange Juice ") + menuPrice.get("Apple Pie    ");
+                  int o16SuggestedTotalCalories = menuCal.get("Cheeseburger ") + menuCal.get("Chef Salad   ") + menuCal.get("Orange Juice ") + menuCal.get("Apple Pie    ");
+                  System.out.println("\n" + "Okay " + name + ", this is my recommended order...");
+                  System.out.println("---------------------------");
+                  System.out.println("Cheeseburger " + "         $" + menuPrice.get("Cheeseburger "));
+                  System.out.println("Chef Salad   " + "         $" + menuPrice.get("Chef Salad   "));
+                  System.out.println("Orange Juice " + "         $" + menuPrice.get("Orange Juice "));
+                  System.out.println("Apple Pie    " + "         $" + menuPrice.get("Apple Pie    "));
+                  System.out.println("\n" + "Total        " + "         $" + roundVal(o16SuggestedOrderTotal));
+
+            //find out if user wants to accept suggestion
+            boolean accepted = false;
+            while(!accepted){
+            System.out.print("\n" + "This order has a total of " + o16SuggestedTotalCalories + " calories. Would you like to accept it? (YES or NO): ");
+            String accept = scan.next().toUpperCase();
+
+            //if user wants suggested order
+            if (accept.equals("YES")){
+              System.out.println("\n" + "Okay " + name + ", I will begin making your order now, please follow the payment instructions on the machine");
+              accepted = true;
+              wantSuggestion = true;
+            }
+
+            //if user does not want suggested orders
+              else if (accept.equals("NO")){
+                System.out.println("\n" + "Okay " + name + ", I will begin making your previous order now, please follow the payment instructions on the machine");
+                accepted = true;
+                wantSuggestion = true;
+              }
+
+            //invalid answer
+            else{
+              System.out.println("Sorry I do not understand you. Please either enter \'YES\' or \'NO\' and try again:");
+            }
+          }
+        }
+      }
+
+      //if user does not want suggestion
+      else if (suggestionsResponse.equals("NO")){
+        System.out.println("\n" + "Okay " + name + ", I will begin making your order now, please follow the payment instructions on the machine");
+        wantSuggestion = true;
+      }
+
+      //invalid answer
+      else{
+        System.out.println("Sorry I do not understand you. Please either enter \'YES\' or \'NO\' and try again:");
+      }
   }
+}
 }
